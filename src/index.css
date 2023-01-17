@@ -1,0 +1,17 @@
+.root-table-header {
+    display: table-header-group !important;
+}
+
+.text-red {
+    font-size: 16px !important;
+    line-height: 19px;
+    color: #FF0000;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.css-1igy7s2 {
+    padding:  0 !important;
+}

@@ -1,0 +1,26 @@
+.job-status-form-conatiner {
+    width: 450px;
+
+    .close-btn {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .Heading {
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .form-content {
+
+        .detail-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 20px 0;
+        }
+
+    }
+
+}

@@ -1,0 +1,50 @@
+    .conatct-form-conatiner {
+        min-width: 550px;
+        max-width: 900px;
+        padding-bottom: 20px;
+
+        .css-tp0lum-MuiButtonBase-root-MuiButton-root svg {
+            font-size: 1.2rem !important;
+        }
+
+        .close-btn {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .Heading {
+            display: flex;
+            justify-content: center;
+            padding: 25px;
+        }
+
+        .form-content {
+            padding: 25px;
+
+            .content-wrapper {
+                display: flex;
+                justify-content: center;
+
+                .title {
+                    align-items: center;
+                    flex: 1;
+                    color: #233966;
+                    font-size: 18px;
+                    font-size: 500 !important;
+                }
+
+                .description {
+                    align-items: center;
+                    flex: 3;
+                    font-size: 15px;
+                    font-size: 400 !important;
+                }
+            }
+
+        }
+
+    }
+
+    .css-1dur2uz-MuiPaper-root-MuiDialog-paper {
+        max-width: 900px !important;
+    }

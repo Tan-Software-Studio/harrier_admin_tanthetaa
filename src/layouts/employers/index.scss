@@ -1,0 +1,62 @@
+.employer-details-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .employer-fields {
+        flex: 1.2;
+        margin: 20px;
+        background: #FFFFFF !important;
+        box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.15);
+        border-radius: 30px;
+
+        .detail-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .title {
+                flex: 1;
+                font-size: 15px;
+                color: #233966;
+                padding: 5px 15px;
+            }
+
+            .text-field {
+                flex: 2;
+
+            }
+        }
+
+        .bottom-terms-content {
+
+            margin: 30px 10px 25px;
+
+            .bottom-content {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .check-box-field {
+                    width: 10px;
+                    height: 10px;
+                    box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.15);
+                }
+
+                .title {
+                    flex: 2;
+                    font-size: 15px;
+                    color: #233966;
+                    padding: 5px 15px;
+
+                    .text-blue {
+                        color: #007aff;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+    }
+
+}

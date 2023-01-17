@@ -1,0 +1,95 @@
+.ats-form-conatiner {
+    width: auto;
+    padding-bottom: 20px;
+
+    .close-btn {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .Heading {
+        display: flex;
+        justify-content: center;
+        padding: 25px;
+    }
+
+    .form-content {
+        padding: 20px 40px;
+
+        .detail-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .title {
+                flex: 1.5;
+                font-size: 15px;
+                padding: 5px 15px;
+            }
+
+            .text-input-field {
+                flex: 2;
+                min-height: 45px;
+            }
+        }
+
+        .detail-content-symbol {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .title {
+                flex: 1.5;
+                font-size: 15px;
+                padding: 5px 15px;
+            }
+
+            .input-field-wrapper {
+                display: flex;
+                justify-content: space-between;
+                flex: 2;
+
+                .text-input-field {
+                    flex: 2;
+                    min-height: 45px;
+                }
+
+                .symbol-input-field {
+                    flex: 1;
+                    max-height: 35px;
+                }
+            }
+        }
+
+    }
+
+}
+
+.bg-Color-success {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #D2EFE6;
+}
+
+.bg-Color-info {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #B3CCFF;
+}
+
+.bg-Color-warning {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #FBEACC;
+}
+
+.bg-Color-error {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #F5CCCC;
+}
+
+.override-input-field {
+    margin-left: 10px;
+    max-height: 45px !important;
+}
