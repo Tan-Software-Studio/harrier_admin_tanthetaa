@@ -72,7 +72,7 @@ export default function CvList() {
           const data = JSON.parse(Decrypt(res?.data?.data));
           const RequestedList = data?.list?.data;
 
-          console.log("---res", RequestedList);
+          // console.log("---res", RequestedList);
           if (res?.data?.success) {
             const temp = [];
             for (let i of RequestedList) {

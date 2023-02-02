@@ -515,7 +515,7 @@ function CandidatesUpdate() {
       .then((res) => {
         const data = Decrypt(res?.data?.data);
         const mydata = JSON.parse(data);
-        console.log("getSingleCandidate --->", mydata);
+        // console.log("getSingleCandidate --->", mydata);
 
         if (res?.data?.success) {
           setCandidate(mydata);

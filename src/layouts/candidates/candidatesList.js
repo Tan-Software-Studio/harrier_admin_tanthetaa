@@ -175,7 +175,7 @@ export default function CandidatesList() {
         const myData = JSON.parse(Decrypt(res?.data?.data));
         const candidateList = myData?.data;
 
-        console.log("--------->>> candidateList", candidateList);
+        // console.log("--------->>> candidateList", candidateList);
 
         if (res?.data?.success) {
           const temp = [];
@@ -217,6 +217,15 @@ export default function CandidatesList() {
                   </MDTypography>
                 </MDBox>
               ),
+              time_in_current_role: (
+                <MDBox lineHeight={1}>
+                  <MDTypography display="block" variant="button" fontWeight="medium">
+                    {dayjs(i?.time_in_current_role).format("DD-MM-YYYY") !== "Invalid Date"
+                      ? dayjs(i?.time_in_current_role).format("DD-MM-YYYY")
+                      : "-"}
+                  </MDTypography>
+                </MDBox>
+              ),
               current_salary: (
                 <MDBox lineHeight={1}>
                   <MDTypography display="block" variant="button" fontWeight="medium">
@@ -247,15 +256,28 @@ export default function CandidatesList() {
                   </MDTypography>
                 </MDBox>
               ),
+              freelance_daily_rate: (
+                <MDBox lineHeight={1}>
+                  <MDTypography display="block" variant="button" fontWeight="medium">
+                    {i?.freelance_daily_rate_symbol_list?.currency_code} {i?.freelance_daily_rate}
+                  </MDTypography>
+                </MDBox>
+              ),
               notice_period: (
                 <MDBox lineHeight={1}>
                   <MDTypography display="block" variant="button" fontWeight="medium">
-                    {/* {i?.notice_period !== null ? `${i?.notice_period} Week` : "-"} */}
                     {i?.notice_period == 0 || i?.notice_period == 1
                       ? `${i?.notice_period} Week`
                       : i?.notice_period == null
                       ? "-"
                       : `${i?.notice_period} Weeks`}
+                  </MDTypography>
+                </MDBox>
+              ),
+              line_management: (
+                <MDBox lineHeight={1}>
+                  <MDTypography display="block" variant="button" fontWeight="medium">
+                    {i?.line_management}
                   </MDTypography>
                 </MDBox>
               ),
@@ -302,6 +324,27 @@ export default function CandidatesList() {
                   </MDTypography>
                 </MDBox>
               ),
+              current_country: (
+                <MDBox lineHeight={1}>
+                  <MDTypography display="block" variant="button" fontWeight="medium">
+                    {i?.current_country_list?.country_name}
+                  </MDTypography>
+                </MDBox>
+              ),
+              current_region: (
+                <MDBox lineHeight={1}>
+                  <MDTypography display="block" variant="button" fontWeight="medium">
+                    {i?.current_regions_list?.title}
+                  </MDTypography>
+                </MDBox>
+              ),
+              working_arrangements: (
+                <MDBox lineHeight={1}>
+                  <MDTypography display="block" variant="button" fontWeight="medium">
+                    {i?.working_arrangements}
+                  </MDTypography>
+                </MDBox>
+              ),
               area_of_law: (
                 <MDBox lineHeight={1}>
                   <MDTypography display="block" variant="button" fontWeight="medium">
@@ -338,6 +381,70 @@ export default function CandidatesList() {
                 </MDBox>
               ),
 
+              legaltech_vendor_or_consultancy: (
+                <MDBox lineHeight={1}>
+                  <MDTypography display="block" variant="button" fontWeight="medium">
+                    {i?.legaltech_vendor_or_consultancy_list?.[0]?.title}
+                  </MDTypography>
+                </MDBox>
+              ),
+              languages: (
+                <MDBox lineHeight={1}>
+                  <MDTypography display="block" variant="button" fontWeight="medium">
+                    {i?.languages?.toString()}
+                  </MDTypography>
+                </MDBox>
+              ),
+              customer_type: (
+                <MDBox lineHeight={1}>
+                  <MDTypography display="block" variant="button" fontWeight="medium">
+                    {i?.customer_type?.toString()}
+                  </MDTypography>
+                </MDBox>
+              ),
+              desired_employer_type: (
+                <MDBox lineHeight={1}>
+                  <MDTypography display="block" variant="button" fontWeight="medium">
+                    {i?.desired_employer_type?.toString()}
+                  </MDTypography>
+                </MDBox>
+              ),
+              desired_country: (
+                <MDBox lineHeight={1}>
+                  <MDTypography display="block" variant="button" fontWeight="medium">
+                    {i?.desired_country?.toString()}
+                  </MDTypography>
+                </MDBox>
+              ),
+              desired_working_arrangements: (
+                <MDBox lineHeight={1}>
+                  <MDTypography display="block" variant="button" fontWeight="medium">
+                    {i?.desired_working_arrangements?.toString()}
+                  </MDTypography>
+                </MDBox>
+              ),
+              legal_tech_tools: (
+                <MDBox lineHeight={1}>
+                  <MDTypography display="block" variant="button" fontWeight="medium">
+                    {i?.legal_tech_tools?.toString()}
+                  </MDTypography>
+                </MDBox>
+              ),
+              tech_tools: (
+                <MDBox lineHeight={1}>
+                  <MDTypography display="block" variant="button" fontWeight="medium">
+                    {i?.tech_tools?.toString()}
+                  </MDTypography>
+                </MDBox>
+              ),
+              qualification: (
+                <MDBox lineHeight={1}>
+                  <MDTypography display="block" variant="button" fontWeight="medium">
+                    {i?.qualification?.toString()}
+                  </MDTypography>
+                </MDBox>
+              ),
+
               updated_at: (
                 <MDBox lineHeight={1}>
                   <MDTypography display="block" variant="button" fontWeight="medium">
@@ -347,10 +454,31 @@ export default function CandidatesList() {
                   </MDTypography>
                 </MDBox>
               ),
+              law_degree: (
+                <MDBox lineHeight={1}>
+                  <MDTypography display="block" variant="button" fontWeight="medium">
+                    {i?.law_degree == 1 ? "Yes" : "No"}
+                  </MDTypography>
+                </MDBox>
+              ),
+              qualified_lawyer: (
+                <MDBox lineHeight={1}>
+                  <MDTypography display="block" variant="button" fontWeight="medium">
+                    {i?.qualified_lawyer == 1 ? "Yes" : "No"}
+                  </MDTypography>
+                </MDBox>
+              ),
               harrier_candidate: (
                 <MDBox lineHeight={1}>
                   <MDTypography display="block" variant="button" fontWeight="medium">
                     {i?.harrier_candidate == 1 ? "Yes" : "No"}
+                  </MDTypography>
+                </MDBox>
+              ),
+              harrier_search: (
+                <MDBox lineHeight={1}>
+                  <MDTypography display="block" variant="button" fontWeight="medium">
+                    {i?.harrier_search == 1 ? "Yes" : "No"}
                   </MDTypography>
                 </MDBox>
               ),
@@ -490,14 +618,20 @@ export default function CandidatesList() {
   const handelSearch = (e) => {
     if (e.target.value) {
       const searchData = oldCandidatesData.filter((i) => {
-        console.log("------->>>> i", i);
+        // console.log("------->>>> i", i);
 
         let job_title = i?.job_title?.props?.children?.props?.children
           ?.toLowerCase()
           .includes(e.target.value.toLowerCase());
+
         let time_in_industry = i?.time_in_industry?.props?.children?.props?.children
           ?.toLowerCase()
           .includes(e.target.value.toLowerCase());
+
+        let time_in_current_role = i?.time_in_current_role?.props?.children?.props?.children
+          ?.toLowerCase()
+          .includes(e.target.value.toLowerCase());
+
         let current_salary = i?.current_salary?.props?.children?.props?.children?.[2]
           ?.toString()
           .includes(e.target.value.toLowerCase());
@@ -512,6 +646,9 @@ export default function CandidatesList() {
           i?.desired_bonus_or_commission?.props?.children?.props?.children?.[2]
             ?.toString()
             .includes(e.target.value.toLowerCase());
+        let freelance_daily_rate = i?.freelance_daily_rate?.props?.children?.props?.children?.[2]
+          ?.toString()
+          .includes(e.target.value.toLowerCase());
 
         let current_salary_symbol = i?.current_salary?.props?.children?.props?.children?.[0]
           ?.toLowerCase()
@@ -531,9 +668,18 @@ export default function CandidatesList() {
             ?.toLowerCase()
             ?.toString()
             .includes(e.target.value.toLowerCase());
+        let freelance_daily_rate_symbol =
+          i?.freelance_daily_rate?.props?.children?.props?.children?.[0]
+            ?.toLowerCase()
+            ?.toString()
+            .includes(e.target.value.toLowerCase());
 
         let notice_period = i?.notice_period?.props?.children?.props?.children
           ?.toLowerCase()
+          ?.toString()
+          .includes(e.target.value.toLowerCase());
+
+        let line_management = i?.line_management?.props?.children?.props?.children
           ?.toString()
           .includes(e.target.value.toLowerCase());
         let pqe = i?.pqe?.props?.children?.props?.children
@@ -542,6 +688,26 @@ export default function CandidatesList() {
         let updated_at = i?.updated_at?.props?.children?.props?.children
           ?.toLowerCase()
           .includes(e.target.value.toLowerCase());
+
+        let law_degree = i?.law_degree?.props?.children?.props?.children
+          ?.toLowerCase()
+          .includes(e.target.value.toLowerCase());
+
+        let qualified_lawyer = i?.qualified_lawyer?.props?.children?.props?.children
+          ?.toLowerCase()
+          .includes(e.target.value.toLowerCase());
+
+        let harrier_candidate = i?.harrier_candidate?.props?.children?.props?.children
+          ?.toLowerCase()
+          .includes(e.target.value.toLowerCase());
+        let harrier_search = i?.harrier_search?.props?.children?.props?.children
+          ?.toLowerCase()
+          .includes(e.target.value.toLowerCase());
+
+        let status = i?.status?.props?.children?.props?.children
+          ?.toLowerCase()
+          .includes(e.target.value.toLowerCase());
+
         let name1 = i?.name?.props?.children?.props?.children?.[0]
           ?.toLowerCase()
           .includes(e.target.value.toLowerCase());
@@ -573,6 +739,18 @@ export default function CandidatesList() {
           ?.toLowerCase()
           .includes(e.target.value.toLowerCase());
 
+        let current_country = i?.current_country?.props?.children?.props?.children
+          ?.toLowerCase()
+          .includes(e.target.value.toLowerCase());
+
+        let current_region = i?.current_region?.props?.children?.props?.children
+          ?.toLowerCase()
+          .includes(e.target.value.toLowerCase());
+
+        let working_arrangements = i?.working_arrangements?.props?.children?.props?.children
+          ?.toLowerCase()
+          .includes(e.target.value.toLowerCase());
+
         let area_of_law = i?.area_of_law?.props?.children?.props?.children
           ?.toLowerCase()
           .includes(e.target.value.toLowerCase());
@@ -601,20 +779,61 @@ export default function CandidatesList() {
           ?.toString()
           .includes(e.target.value.toLowerCase());
 
+        let legaltech_vendor_or_consultancy =
+          i?.legaltech_vendor_or_consultancy?.props?.children?.props?.children
+            ?.toLowerCase()
+            ?.toString()
+            .includes(e.target.value.toLowerCase());
+
+        let languages = i?.languages?.props?.children?.props?.children
+          ?.toLowerCase()
+          .includes(e.target.value.toLowerCase());
+        let customer_type = i?.customer_type?.props?.children?.props?.children
+          ?.toLowerCase()
+          .includes(e.target.value.toLowerCase());
+        let desired_employer_type = i?.desired_employer_type?.props?.children?.props?.children
+          ?.toLowerCase()
+          .includes(e.target.value.toLowerCase());
+        let desired_country = i?.desired_country?.props?.children?.props?.children
+          ?.toLowerCase()
+          .includes(e.target.value.toLowerCase());
+        let desired_working_arrangements =
+          i?.desired_working_arrangements?.props?.children?.props?.children
+            ?.toLowerCase()
+            .includes(e.target.value.toLowerCase());
+        let legal_tech_tools = i?.legal_tech_tools?.props?.children?.props?.children
+          ?.toLowerCase()
+          .includes(e.target.value.toLowerCase());
+        let tech_tools = i?.tech_tools?.props?.children?.props?.children
+          ?.toLowerCase()
+          .includes(e.target.value.toLowerCase());
+        let qualification = i?.qualification?.props?.children?.props?.children
+          ?.toLowerCase()
+          .includes(e.target.value.toLowerCase());
+
         return (
           job_title ||
           time_in_industry ||
+          time_in_current_role ||
           current_salary ||
           current_bonus_or_commission ||
           desired_salary ||
           desired_bonus_or_commission ||
+          freelance_daily_rate ||
           current_salary_symbol ||
           current_bonus_or_commission_symbol ||
           desired_salary_symbol ||
           desired_bonus_or_commission_symbol ||
+          freelance_daily_rate_symbol ||
           notice_period ||
+          line_management ||
           pqe ||
           updated_at ||
+          law_degree ||
+          qualified_lawyer ||
+          harrier_candidate ||
+          harrier_search ||
+          status ||
           name1 ||
           name2 ||
           id ||
@@ -623,13 +842,25 @@ export default function CandidatesList() {
           employer ||
           current_company_url ||
           desired_region ||
+          current_country ||
+          current_region ||
+          working_arrangements ||
           area_of_law ||
           jurisdiction ||
           legal_experience ||
           deal_size ||
           deal_size_symbol ||
           sales_quota ||
-          sales_quota_symbol
+          sales_quota_symbol ||
+          legaltech_vendor_or_consultancy ||
+          languages ||
+          customer_type ||
+          desired_employer_type ||
+          desired_country ||
+          desired_working_arrangements ||
+          legal_tech_tools ||
+          tech_tools ||
+          qualification
         );
       });
       setCandidatesData(searchData);
