@@ -2,6 +2,7 @@ import * as XLSX from "xlsx";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
+  Avatar,
   Card,
   Dialog,
   DialogActions,
@@ -58,6 +59,7 @@ export default function EmployersList() {
   }, []);
 
   const employerColumn = [
+    { Header: "Avtar", accessor: "logo_path", align: "center" },
     { Header: "Name", accessor: "name", align: "left" },
     { Header: "Website", accessor: "url", align: "left" },
     { Header: "Email", accessor: "email", align: "left" },
@@ -106,10 +108,24 @@ export default function EmployersList() {
         const myData = JSON.parse(Decrypt(res?.data?.data));
         const employersList = myData?.data;
 
+        // console.log("-------->>> employersList", employersList);
+
         if (res?.data?.success) {
           const temp = [];
           for (let d of employersList) {
             temp.push({
+              uuid: (
+                <MDBox lineHeight={1}>
+                  <MDTypography display="block" variant="button" fontWeight="medium">
+                    {d?.uuid}
+                  </MDTypography>
+                </MDBox>
+              ),
+              logo_path: (
+                <MDBox lineHeight={1}>
+                  <Avatar alt="avtar" src={d?.logo_path} sx={{ width: 56, height: 56 }} />
+                </MDBox>
+              ),
               name: (
                 <MDBox lineHeight={1}>
                   <MDTypography display="block" variant="button" fontWeight="medium">
