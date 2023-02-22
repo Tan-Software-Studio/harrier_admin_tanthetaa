@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axiosInstanceAuth from "apiServices/axiosInstanceAuth";
+import axiosInstance from "apiServices/axiosInstance";
 import Encrypt from "customHook/EncryptDecrypt/Encrypt";
 import Decrypt from "customHook/EncryptDecrypt/Decrypt";
 import "./index.scss";
@@ -12,11 +13,14 @@ import MDButton from "components/MDButton";
 import MDTypography from "components/MDTypography";
 import MDInput from "components/MDInput";
 import CloseIcon from "@mui/icons-material/Close";
-import { Dialog, DialogActions, DialogContent, DialogContentText } from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogContentText, TextField } from "@mui/material";
+import Autocomplete from "@mui/material/Autocomplete";
 
 function EmployerEdit({ openEditBox, setOpenEditBox, credentials }) {
   const [fields, setFields] = useState({});
   // console.log("-------->>> credentials", credentials);
+  const [employerTypeOption, setEmployerTypeOption] = useState([]);
+  const [sendEmpType, setSendEmpType] = useState({ id: "", title: "" });
 
   useEffect(() => {
     setFields({
@@ -29,7 +33,28 @@ function EmployerEdit({ openEditBox, setOpenEditBox, credentials }) {
       billing_address: credentials?.billing_address,
       contact_details: credentials?.contact_details,
     });
+    setSendEmpType({ title: credentials?.uk_address });
   }, [credentials]);
+
+  useEffect(() => {
+    getOptions();
+  }, []);
+
+  const getOptions = async () => {
+    await axiosInstance
+      .get(`/v1/master_tables_list`)
+      .then((res) => {
+        const myData = JSON.parse(Decrypt(res?.data?.data));
+        const employersTypeList = myData?.mst_employer_types;
+
+        if (res?.data?.success) {
+          setEmployerTypeOption(employersTypeList);
+        }
+      })
+      .catch((err) => {
+        console.log("err--->", err);
+      });
+  };
 
   const [logo, setLogo] = useState([]);
   const [preview, setPreview] = useState();
@@ -66,7 +91,8 @@ function EmployerEdit({ openEditBox, setOpenEditBox, credentials }) {
         url: fields?.url,
         name: fields?.name,
         email: fields?.email,
-        uk_address: fields?.uk_address,
+        // uk_address: fields?.uk_address,
+        uk_address: sendEmpType?.title,
         hq_address: fields?.hq_address,
         billing_address: fields?.billing_address,
         contact_details: fields?.contact_details,
@@ -129,7 +155,7 @@ function EmployerEdit({ openEditBox, setOpenEditBox, credentials }) {
                       fullWidth
                     />
                   </MDBox>
-                  <MDBox m={2} className="detail-content">
+                  {/* <MDBox m={2} className="detail-content">
                     <MDInput
                       type="text"
                       name="uk_address"
@@ -138,14 +164,36 @@ function EmployerEdit({ openEditBox, setOpenEditBox, credentials }) {
                       label="UK Address"
                       fullWidth
                     />
-                  </MDBox>
+                  </MDBox> */}
                   <MDBox m={2} className="detail-content">
+                    <Autocomplete
+                      options={employerTypeOption}
+                      getOptionLabel={(option) => option.title || ""}
+                      value={sendEmpType || {}}
+                      onChange={(e, value) => {
+                        setSendEmpType(value);
+                      }}
+                      renderInput={(params) => <TextField {...params} label="Employer Type" />}
+                      fullWidth
+                    />
+                  </MDBox>
+                  {/* <MDBox m={2} className="detail-content">
                     <MDInput
                       type="text"
                       name="hq_address"
                       onChange={onChange}
                       value={fields?.hq_address || ""}
                       label="HQ Address"
+                      fullWidth
+                    />
+                  </MDBox> */}
+                  <MDBox m={2} className="detail-content">
+                    <MDInput
+                      type="text"
+                      name="hq_address"
+                      onChange={onChange}
+                      value={fields?.hq_address || ""}
+                      label="Office Address"
                       fullWidth
                     />
                   </MDBox>
