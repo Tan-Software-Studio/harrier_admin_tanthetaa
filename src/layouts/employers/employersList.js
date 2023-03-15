@@ -383,7 +383,7 @@ export default function EmployersList() {
                   type="text"
                   placeholder="Search"
                   onChange={handelSearch}
-                  sx={{ flex: 1, margin: "0 10px" }}
+                  sx={{ width: "99%", flex: 1, margin: "0 10px" }}
                 />
               </MDBox>
 

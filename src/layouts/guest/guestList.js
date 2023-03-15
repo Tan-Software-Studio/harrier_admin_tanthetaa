@@ -490,7 +490,7 @@ export default function GuestList() {
                   //     setAllSearch(e.target.value);
                   //     getGuestList(currentPage, e.target.value);
                   // }}
-                  sx={{ flex: 1, margin: "0 10px" }}
+                  sx={{ width: "99%", flex: 1, margin: "0 10px" }}
                 />
               </MDBox>
 

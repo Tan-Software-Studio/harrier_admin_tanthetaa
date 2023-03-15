@@ -5,14 +5,13 @@ import Notifications from "layouts/notifications";
 import CvList from "layouts/cvList/cvList";
 import CandidatesList from "layouts/candidates/candidatesList";
 import EmployersList from "layouts/employers/employersList";
-import EmployersTypeList from "./layouts/employerTypes/employerTypeList"
+import EmployersTypeList from "./layouts/employerTypes/employerTypeList";
 import Settings from "./layouts/settings/settings";
 import SignIn from "layouts/authentication/sign-in";
 import LogOutConfirmation from "layouts/authentication/sign-in/confirmation";
 import ForgotPassword from "layouts/authentication/forgot-password";
 import ResetPassword from "layouts/authentication/reset-password";
 import BASE_URL_CV_PATH from "./pathFiles/basePathUrl";
-
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -23,6 +22,8 @@ import EmployerCreate from "layouts/employers/employerCreate";
 import GuestList from "layouts/guest/guestList";
 import ApplicantTrackingSystem from "layouts/applicantTrackingSystem/applicantTrackingSystem";
 import ContactUs from "layouts/contactUs/contactUs";
+import JobSection from "layouts/jobSection/jobSection";
+import JobByEmployer from "layouts/jobSection/jobByEmployer";
 
 // const BASE_CV_PATH = BASE_URL_CV_PATH;
 
@@ -93,6 +94,19 @@ const routes = [
     icon: <Icon fontSize="small">person</Icon>,
     route: "/guest",
     component: <GuestList />,
+  },
+  {
+    type: "collapse",
+    auth: true,
+    name: "Jobs",
+    key: "jobs",
+    icon: <Icon fontSize="small">badge</Icon>,
+    route: "/jobs",
+    component: <JobSection />,
+  },
+  {
+    route: "/jobs/:id",
+    component: <JobByEmployer />,
   },
   {
     type: "collapse",

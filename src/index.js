@@ -2,6 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 
+import "bootstrap/dist/css/bootstrap.css"; //Bootsrap
+import "bootstrap/dist/js/bootstrap.js"; //Bootsrap
+
 import App from "App";
 import "./index.css";
 
@@ -9,7 +12,7 @@ import "./index.css";
 import { MaterialUIControllerProvider } from "context";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import 'react-loading-skeleton/dist/skeleton.css'
+import "react-loading-skeleton/dist/skeleton.css";
 import { slice } from "stylis";
 
 ReactDOM.render(
