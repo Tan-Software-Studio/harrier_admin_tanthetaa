@@ -4,16 +4,57 @@ import { useNavigate, useParams } from "react-router-dom";
 import axiosInstanceAuth from "apiServices/axiosInstanceAuth";
 import Decrypt from "customHook/EncryptDecrypt/Decrypt";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-
 import downArrow from "../../assets/images/arrow-down.png";
+import Encrypt from "customHook/EncryptDecrypt/Encrypt";
+import MDButton from "components/MDButton";
+import { toast } from "react-toastify";
 
 export default function JobByEmployer() {
   const navigate = useNavigate();
   const isLoggedIn = localStorage.getItem("token") !== null;
 
   const { id } = useParams();
+
+  let file_url = "";
+  file_url = process.env.REACT_APP_FILE_PATH;
+
+  const [FileName, setFileName] = useState("");
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/");
+    }
+  });
+
+  useEffect(() => {
+    getAllJobDetails(id);
+  }, []);
+
+  const getAllJobDetails = async (id) => {
+    const encryptedData = Encrypt(
+      JSON.stringify({
+        emp_uid: id,
+      })
+    );
+    await axiosInstanceAuth
+      .post("/v1/adm/all/jobs/details", {
+        response: encryptedData,
+      })
+      .then((res) => {
+        const msg = Decrypt(res?.data?.message).replace(/"/g, " ");
+        const mydata = JSON.parse(Decrypt(res?.data?.data));
+
+        if (res?.data?.success) {
+          setJobDetails(mydata);
+        } else {
+          toast.error(msg);
+        }
+      })
+      .catch((err) => {
+        console.log("err --->", err);
+      });
+  };
 
   const [jobDetails, setJobDetails] = useState([
     {
@@ -293,36 +334,6 @@ export default function JobByEmployer() {
     }
   };
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate("/");
-    }
-  });
-
-  useEffect(() => {
-    getJobDetails(id);
-  }, []);
-
-  const getJobDetails = async (id) => {
-    // await axiosInstanceAuth
-    //   .post("/v1/emp/all/jobs/details", {
-    //     id: id,
-    //   })
-    //   .then((res) => {
-    //     const msg = Decrypt(res?.data?.message).replace(/"/g, " ");
-    //     const mydata = JSON.parse(Decrypt(res?.data?.data));
-    //     console.log("----->>getJobDetails", mydata);
-    //     if (res?.data?.success) {
-    //       setJobDetails(mydata);
-    //     } else {
-    //         toast.error(msg);
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log("err --->", err);
-    //   });
-  };
-
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -340,12 +351,28 @@ export default function JobByEmployer() {
                       <div>
                         <h4 className="job-title">{collapsed.job_title}</h4>
                       </div>
-                      <div className="d-flex align-items-center justify-content-between">
-                        {collapsed.status == 1 ? (
-                          <div className="job-status-active">Active Job</div>
+                      <div className="d-flex ">
+                        {FileName == null ? (
+                          " "
                         ) : (
-                          <div className="job-status-inactive">Inactive Job</div>
+                          <a href={`${file_url}${FileName}`} target="_blank">
+                            <MDButton
+                              variant="contained"
+                              color="success"
+                              className="symbol-input-field"
+                              sx={{ marginRight: "10px" }}
+                            >
+                              View
+                            </MDButton>
+                          </a>
                         )}
+                        <div className="d-flex align-items-center justify-content-between">
+                          {collapsed.status == 1 ? (
+                            <div className="job-status-active">Active Job</div>
+                          ) : (
+                            <div className="job-status-inactive">Inactive Job</div>
+                          )}
+                        </div>
                       </div>
                     </div>
 
