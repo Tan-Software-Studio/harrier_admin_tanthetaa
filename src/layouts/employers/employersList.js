@@ -282,6 +282,7 @@ export default function EmployersList() {
       })
       .then((res) => {
         const myData = JSON.parse(Decrypt(res?.data?.data));
+        console.log("emp::>>>", myData);
         const workSheet = XLSX.utils.json_to_sheet(myData);
         const workBook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workBook, workSheet, "employers");
@@ -358,7 +359,7 @@ export default function EmployersList() {
                   sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
                 >
                   <MDBox mx={1} bgColor="white" borderRadius="lg">
-                    <MDButton onClick={downloadReport} variant="outlined" color="success">
+                    <MDButton onClick={() => downloadReport()} variant="outlined" color="success">
                       Download / Export to Excel
                     </MDButton>
                   </MDBox>

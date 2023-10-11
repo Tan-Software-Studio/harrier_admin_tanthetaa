@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import axiosInstanceAuth from "apiServices/axiosInstanceAuth";
@@ -692,6 +692,15 @@ function CandidatesUpdate() {
     });
     return unique;
   };
+
+  const textareaRef = useRef(null);
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, [candidate?.profile_about]);
 
   return (
     <DashboardLayout>
@@ -1621,6 +1630,7 @@ function CandidatesUpdate() {
             <MDBox className="detail-content">
               <MDTypography className="title">Profile</MDTypography>
               <MDInput
+                ref={textareaRef}
                 multiline={true}
                 disabled={isDisable}
                 type="text"

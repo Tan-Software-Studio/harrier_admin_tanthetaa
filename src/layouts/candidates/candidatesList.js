@@ -600,6 +600,7 @@ export default function CandidatesList() {
       })
       .then((res) => {
         const myData = JSON.parse(Decrypt(res?.data?.data));
+        console.log("can::>>>", myData);
         const workSheet = XLSX.utils.json_to_sheet(myData);
         const workBook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workBook, workSheet, "candidates");
@@ -892,7 +893,7 @@ export default function CandidatesList() {
                 </MDTypography>
 
                 <MDBox bgColor="white" borderRadius="lg">
-                  <MDButton onClick={downloadReport} variant="outlined" color="success">
+                  <MDButton onClick={() => downloadReport()} variant="outlined" color="success">
                     Download / Export to Excel
                   </MDButton>
                 </MDBox>

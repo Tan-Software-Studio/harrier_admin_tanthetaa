@@ -163,7 +163,7 @@ export default function ApplicantTrackingSystem() {
     { Header: "Candidate ID", accessor: "c_id", align: "left" },
     { Header: "CV Request Date", accessor: "request_date", align: "left" },
     { Header: "CV Status", accessor: "is_cv", align: "left" },
-    // { Header: "interview requests", accessor: "interview_request", align: "left" },
+    { Header: "interview requests", accessor: "interview_request", align: "left" },
     { Header: "interview requests date", accessor: "interview_request_date", align: "left" },
     { Header: "Job status", accessor: "status", align: "left" },
     { Header: "Offer Accepted Date", accessor: "offer_accepted_date", align: "left" },
@@ -283,21 +283,29 @@ export default function ApplicantTrackingSystem() {
                     <MDTypography
                       variant="button"
                       fontWeight="medium"
+                      color="warning"
+                      className="bg-Color-warning"
+                    >
+                      Requested
+                    </MDTypography>
+                  ) : i?.interview_request == 2 ? (
+                    <MDTypography
+                      variant="button"
+                      fontWeight="medium"
                       color="success"
                       className="bg-Color-success"
                     >
-                      Yes
+                      Accepted
                     </MDTypography>
-                  ) : i?.interview_request == 0 ? (
+                  ) : i?.interview_request == 3 ? (
                     <MDTypography
                       variant="button"
                       fontWeight="medium"
                       color="error"
                       className="bg-Color-error"
                     >
-                      No
-                    </MDTypography>
-                  ) : (
+                      Rejected
+                    </MDTypography>) : (
                     ""
                   )}
                 </MDBox>
@@ -416,11 +424,12 @@ export default function ApplicantTrackingSystem() {
   const jobStatusSend = jobStatusListOptions.filter((x) => x.id == jobStatus);
   const interviewReqSend = interviewReqDateOptions.filter((x) => x.id == interviewRequest);
 
+
   const getUpdateApplicantDetails = async (singleCandidateData) => {
     const encryptedData = Encrypt(
       JSON.stringify({
         c_job_id: singleCandidateData?.c_job_id,
-        interview_request: interviewRequest?.id,
+        interview_request: interviewRequest,
         interview_request_date: interviewReqDate,
         c_job_status: jobStatus?.id,
         offer_accepted_date: offerAcceptedDate,
@@ -429,6 +438,7 @@ export default function ApplicantTrackingSystem() {
         start_date: joiningDate,
         offer_salary_symbol: sendOfferSalarySymbol?.id,
         offer_bonus_commission_symbol: sendOfferBonusCommisionSymbol?.id,
+
       })
     );
     await axiosInstanceAuth

@@ -156,15 +156,9 @@ function Basic() {
   };
 
   return (
-    <BasicLayout >
-      <MDBox
-      >
-        <MDBox
-          mx={2}
-          p={2}
-          mb={2}
-          sx={{ display: 'flex', justifyContent: 'center' }}
-        >
+    <BasicLayout>
+      <MDBox>
+        <MDBox mx={2} p={2} mb={2} sx={{ display: "flex", justifyContent: "center" }}>
           <MDAvatar src={logo} size="xxl" variant="square" />
         </MDBox>
         <Card>
@@ -200,13 +194,15 @@ function Basic() {
                   </MDTypography>
                 )}
               </MDBox>
-              <MDBox mb={2}
+              <MDBox
+                mb={2}
                 onKeyPress={(event) => {
                   var key = event.keyCode || event.which;
                   if (key === 13) {
-                    handleSubmit()
+                    handleSubmit();
                   }
-                }}>
+                }}
+              >
                 <FormControl sx={{ width: "100%" }} variant="outlined">
                   <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                   <OutlinedInput
@@ -252,11 +248,7 @@ function Basic() {
                 </MDTypography>
               </MDBox>
               <MDBox mt={4} mb={1}>
-                <MDButton
-                  onClick={handleSubmit}
-                  variant="gradient"
-                  color="info"
-                  fullWidth>
+                <MDButton onClick={handleSubmit} variant="gradient" color="info" fullWidth>
                   sign in
                 </MDButton>
               </MDBox>
@@ -264,7 +256,7 @@ function Basic() {
           </MDBox>
         </Card>
       </MDBox>
-    </BasicLayout >
+    </BasicLayout>
   );
 }
 
